@@ -1,15 +1,15 @@
 # file: app.rb
 
 require_relative 'lib/database_connection'
+require_relative 'lib/book_repository'
 
 # We need to give the database name to the method `connect`.
-DatabaseConnection.connect('your_database_name')
-
-# Perform a SQL query on the database and get the result set.
-sql = 'SELECT id, title FROM albums;'
-result = DatabaseConnection.exec_params(sql, [])
+DatabaseConnection.connect('book_store')
 
 # Print out each record from the result set .
-result.each do |record|
-  p record
+
+book_repository = BookRepository.new
+
+book_repository.all.each do |book|
+  p book
 end
