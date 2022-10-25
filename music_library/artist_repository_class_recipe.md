@@ -114,6 +114,15 @@ class ArtistRepository
     # Returns an array of Artist objects.
   end
 
+  def find(id)
+    # Executes the SQL query
+    # SELECT id, name, genre FROM artists WHERE id = $1
+
+    # Returns a single Artist object
+  end
+
+end
+
 ```
 
 ## 6. Write Test Examples
@@ -126,13 +135,30 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all students
+# Get all artists
 
 repo = ArtistRepository.new
 artists = repo.all
 artists.length # => 2
 artists.first.id # => '1'
 artists.first.name # => 'Pixies'
+
+# 2
+# Get a single artist
+
+repo = ArtistRepository.new
+artist = repo.find(1)
+artist.name # => 'Pixies'
+artist.genre # => 'Rock'
+
+# 3
+# Get anothersingle artist
+
+repo = ArtistRepository.new
+artist = repo.find(2)
+artist.name # => 'ABBA'
+artist.genre # => 'Pop'
+
 ```
 
 Encode this example as a test.
