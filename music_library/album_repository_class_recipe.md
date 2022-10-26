@@ -1,14 +1,6 @@
 # Album Model and Repository Classes Design Recipe
 
-_Copy this recipe template to design and implement Model and Repository classes for a database table._
-
 ## 1. Design and create the Table
-
-If the table is already created in the database, you can skip this step.
-
-Otherwise, [follow this recipe to design and create the SQL schema for your table](./single_table_design_recipe_template.md).
-
-_In this template, we'll use an example table `students`_
 
 ```
 # EXAMPLE
@@ -88,8 +80,6 @@ end
 
 ```
 
-_You may choose to test-drive this class, but unless it contains any more logic than the example above, it is probably not needed._
-
 ## 5. Define the Repository Class interface
 
 Your Repository class will need to implement methods for each "read" or "write" operation you'd like to run against the database.
@@ -121,6 +111,27 @@ class AlbumRepository
     # SELECT id, title, release_year, artist_id FROM albums WHERE id = $1
 
     # Returns a single album record
+  end
+
+  # Creates a new album record
+  # album is an instance of Album
+  def create(album)
+    # Executes the SQL query:
+    # INSERT INTO albums (title, release_year, artist_id) VALUES ($1, $2)
+
+    # Returns nothing
+  end
+
+  # deletes
+  def delete(id)
+
+  end
+
+  def update(album)
+    # Executes the SQL query:
+    # UPDATE albums SET title = $1, release_year = $2, artist_id = $3 WHERE id = $4;
+
+    # returns nothing
   end
 
 end
@@ -155,6 +166,40 @@ album = repo.find(1)
 album.title # => 'Doolittle'
 album.release_year # => '1989'
 album.artist_id # => '2'
+
+# 3
+# creates an album record
+# repository = AlbumRepository.new
+
+# album = Album.new
+# album.title = 'Trompe le Monde'
+# album.release_year = 1991
+# album.artist_id = 1
+
+# repository.create(album)
+
+# all_albums = repository.all
+
+# The all_albums array should contain the new Album object
+
+# 4
+# delete
+
+# 5
+# updates an album
+repo = AlbumRepository.new
+
+album = repo.find(1)
+
+album.title = 'New Title'
+album.release_year = '2022'
+
+repo.update(album)
+
+repo.find(1)
+
+expect(album.title).to eq 'New Title'
+expect(album.release_year).to eq '2022'
 
 ```
 
