@@ -8,7 +8,7 @@ require_relative 'lib/album_repository'
 DatabaseConnection.connect('music_library')
 
 artist_repository = ArtistRepository.new
-# album_repository = AlbumRepository.new
+album_repository = AlbumRepository.new
 
 # artist_repository.all.each do |artist|
 #   p artist
@@ -20,3 +20,6 @@ artist_repository = ArtistRepository.new
 
 artist = artist_repository.find(2)
 puts artist.name
+
+album = album_repository.find(2)
+puts album.title

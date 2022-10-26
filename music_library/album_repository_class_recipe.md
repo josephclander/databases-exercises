@@ -114,6 +114,15 @@ class AlbumRepository
     # Returns an array of Student objects.
   end
 
+  # select a single record
+  # id argument
+  def find(id)
+    # Executes the SQL query:
+    # SELECT id, title, release_year, artist_id FROM albums WHERE id = $1
+
+    # Returns a single album record
+  end
+
 end
 ```
 
@@ -137,6 +146,15 @@ These examples will later be encoded as RSpec tests.
   albums.first.title # => 'Doolittle'
   albums.first.release_year # => '1989'
   albums.first.artist_id # => '2'
+
+
+# 2
+# Gets a single album record
+repo = AlbumRepository.new
+album = repo.find(1)
+album.title # => 'Doolittle'
+album.release_year # => '1989'
+album.artist_id # => '2'
 
 ```
 
