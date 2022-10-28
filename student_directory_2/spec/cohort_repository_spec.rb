@@ -1,0 +1,1 @@
+require 'cohort_repository'
