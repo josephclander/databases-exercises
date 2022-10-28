@@ -40,8 +40,8 @@ TRUNCATE TABLE cohorts, students RESTART IDENTITY; -- replace with your own tabl
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO cohorts (cohort_name, start_date) VALUES ('ruby', 'Oct 2022');
-INSERT INTO cohorts (cohort_name, start_date) VALUES ('javascript', 'Sept 2022');
+INSERT INTO cohorts (cohort_name, start_date) VALUES ('ruby', '2022-10-01');
+INSERT INTO cohorts (cohort_name, start_date) VALUES ('javascript', '2022-09-01');
 INSERT INTO students (student_name, cohort_id) VALUES ('Joe', 1);
 INSERT INTO students (student_name, cohort_id) VALUES ('Paul', 1);
 INSERT INTO students (student_name, cohort_id) VALUES ('Ellie', 2);
@@ -98,7 +98,7 @@ end
 # Model class
 # (in lib/cohort.rb)
 class Cohort
-attr_accessor :id :cohort_name, :start_date
+attr_accessor :id, :cohort_name, :start_date
 
   def initialize
     @students = []
@@ -120,7 +120,6 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 # Repository class
 # (in lib/cohort_repository.rb)
-
 class CohortRepository
   # Selecting all records
   # No arguments
@@ -162,6 +161,14 @@ class CohortRepository
   # DELETE FROM cohorts WHERE id = $1;
 
   # returns nil
+  end
+
+  # Updates a single Cohort object
+  # one argument: cohort object
+  def update(cohort)
+    # UPDATE cohorts SET cohort_name = $1, start_date = $2 WHERE id = $3;
+
+    # returns nil
   end
 
   # Finds a single cohort and its associated students
@@ -216,7 +223,7 @@ cohort = repo.find(1)
 
 cohort.id # =>  1
 cohort.cohort_name # =>  'ruby'
-cohort.start_date # =>  'Oct 2022'
+cohort.start_date # =>  '2022-10-01'
 
 # 3
 # create a cohort
@@ -233,7 +240,7 @@ repo.create(cohort)
 new_cohort = repo.find(3)
 
 new_cohort.cohort_name # => 'C++'
-new_cohort.start_date # => 'Jan 2022'
+new_cohort.start_date # => '2022-01-01'
 
 # 4
 # delete a cohort
@@ -250,14 +257,14 @@ repo = CohortRepository.new
 cohort = repo.find(1)
 
 cohort.cohort_name = 'new name'
-cohort.start_date =  'Dec 2023'
+cohort.start_date =  '2023-12-01'
 
 repo.update(cohort)
 
 repo.find(1)
 
 cohort.cohort_name # =>  'new name'
-cohort.start_date # =>  'Dec 2023'
+cohort.start_date # =>  '2023-12-01'
 
 # 6
 # finds a single cohort and all its students
@@ -288,7 +295,7 @@ def reset_cohorts_table
   connection.exec(seed_sql)
 end
 
-describe StudentRepository do
+describe CohortRepository do
   before(:each) do 
     reset_cohorts_table
   end
