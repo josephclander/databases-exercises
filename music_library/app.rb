@@ -1,5 +1,5 @@
 # file: app.rb
-
+require_relative './lib/database_connection'
 require_relative './lib/album_repository'
 require_relative './lib/artist_repository'
 
@@ -22,11 +22,11 @@ class Application
     # so it can ask the user to enter some input
     # and then decide to run the appropriate action
     # or behaviour.
-    @io.puts 'Welcome to the music library manager!\n'
-    @io.puts 'What would you like to do?'
+    @io.puts 'Welcome to the music library manager!'
+    @io.puts "\nWhat would you like to do?"
     @io.puts '1 - List all albums'
     @io.puts '2 - List all artists'
-    @io.puts 'Enter your choice: '
+    @io.puts "\nEnter your choice:"
     input = @io.gets.chomp
     if input == '1'
       @io.puts "\nHere is the list of albums:"

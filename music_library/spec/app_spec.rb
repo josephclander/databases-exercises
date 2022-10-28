@@ -16,11 +16,11 @@ describe Application do
   context 'given the user selects "1 = List all albums"' do
     it 'returns a list of albums' do
       terminal = double :terminal
-      expect(terminal).to receive(:puts).with('Welcome to the music library manager!\n').ordered
-      expect(terminal).to receive(:puts).with('What would you like to do?').ordered
+      expect(terminal).to receive(:puts).with('Welcome to the music library manager!').ordered
+      expect(terminal).to receive(:puts).with("\nWhat would you like to do?").ordered
       expect(terminal).to receive(:puts).with('1 - List all albums').ordered
       expect(terminal).to receive(:puts).with('2 - List all artists').ordered
-      expect(terminal).to receive(:puts).with('Enter your choice: ').ordered
+      expect(terminal).to receive(:puts).with("\nEnter your choice:").ordered
       expect(terminal).to receive(:gets).and_return('1').ordered
       expect(terminal).to receive(:puts).with("\nHere is the list of albums:").ordered
       expect(terminal).to receive(:puts).with('* 1 - Doolittle').ordered
@@ -46,11 +46,11 @@ describe Application do
   context 'given the user selects "2 = List all artists"' do
     it 'returns a list of artists' do
       terminal = double :terminal
-      expect(terminal).to receive(:puts).with('Welcome to the music library manager!\n').ordered
-      expect(terminal).to receive(:puts).with('What would you like to do?').ordered
+      expect(terminal).to receive(:puts).with('Welcome to the music library manager!').ordered
+      expect(terminal).to receive(:puts).with("\nWhat would you like to do?").ordered
       expect(terminal).to receive(:puts).with('1 - List all albums').ordered
       expect(terminal).to receive(:puts).with('2 - List all artists').ordered
-      expect(terminal).to receive(:puts).with('Enter your choice: ').ordered
+      expect(terminal).to receive(:puts).with("\nEnter your choice:").ordered
       expect(terminal).to receive(:gets).and_return('2').ordered
       expect(terminal).to receive(:puts).with("\nHere is the list of artists:").ordered
       expect(terminal).to receive(:puts).with('* 1 - Pixies').ordered
