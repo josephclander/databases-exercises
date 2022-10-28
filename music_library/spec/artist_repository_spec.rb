@@ -84,4 +84,13 @@ describe ArtistRepository do
     expect(updated_artist.name).to eq 'Something else'
     expect(updated_artist.genre).to eq 'Disco'
   end
+
+  it 'finds the artist with their albums' do
+    repo = ArtistRepository.new
+
+    artist = repo.find_with_albums(1)
+    expect(artist.name).to eq 'Pixies'
+    expect(artist.albums.length).to eq 3
+    expect(artist.albums.first.title).to eq 'Doolittle'
+  end
 end

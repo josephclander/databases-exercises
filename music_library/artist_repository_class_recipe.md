@@ -148,6 +148,24 @@ class ArtistRepository
   # Returns nothing
   end
 
+  # selects and artist along with their albums
+  # given the artist id
+  def find_with_albums(id)
+    # SELECT artists.id AS "id",
+    # 	artists."name" AS "name",
+    # 	artists.genre AS "genre",
+    # 	albums.id AS "album_id",
+    # 	albums.title AS "title",
+    # 	albums.release_year AS "release_year"
+    # FROM artists
+    # 	JOIN albums
+    # 	ON artists.id = albums.artist_id
+    # WHERE artist_id = $1
+
+    # returns an Artist object
+    # with the array of Album objects
+  end
+
 end
 
 ```
@@ -201,7 +219,7 @@ last_artist = artists.last
 last_artist.name # => 'Beatles'
 last_artist.genre # => 'Pop'
 
-#5 
+# 5 
 # delete an artist at given id
 repo = ArtistRepository.new
 id_to_delete = 1
@@ -212,7 +230,7 @@ all_artists = repo.all
 all_artists.length # => 1
 all_artists.first.id # => '2'
 
-#5 
+# 6
 # updates an artist at given id
 repo = ArtistRepository.new
 
@@ -227,6 +245,15 @@ updated_artist = repo.find(1)
 
 updated_artist.name # => 'Something else'
 updated_artist.genre # => 'Disco'
+
+# 7
+# find artist with albums
+repo = ArtistRepository.new
+
+artist = repo.find_with_albums(1)
+artist.name # => 'Pixies'
+artist.albums.length # => '2'
+artist.albums.first.title # => 'Bossanova'
 
 ```
 

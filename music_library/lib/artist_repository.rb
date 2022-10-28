@@ -1,4 +1,5 @@
 require_relative './artist'
+require_relative './album'
 
 class ArtistRepository
   def all
@@ -38,7 +39,7 @@ class ArtistRepository
 
     DatabaseConnection.exec_params(sql, sql_params)
 
-    return nil
+    nil
   end
 
   def delete(id)
@@ -47,7 +48,7 @@ class ArtistRepository
 
     DatabaseConnection.exec_params(sql, sql_params)
 
-    return nil
+    nil
   end
 
   def update(artist)
@@ -56,6 +57,37 @@ class ArtistRepository
 
     DatabaseConnection.exec_params(sql, sql_params)
 
-    return nil
+    nil
+  end
+
+  def find_with_albums(artist_id)
+    sql = 'SELECT artists.id AS "id",
+              artists."name" AS "name",
+              artists.genre AS "genre",
+              albums.id AS "album_id",
+              albums.title AS "title",
+              albums.release_year AS "release_year"
+            FROM artists
+              JOIN albums
+              ON artists.id = albums.artist_id
+            WHERE artist_id = $1'
+    sql_params = [artist_id]
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+
+    first_artist = result_set.first
+
+    artist = Artist.new
+    artist.id = first_artist['id']
+    artist.name = first_artist['name']
+    artist.genre = first_artist['genre']
+    artist.albums = []
+    result_set.each do |record|
+      album = Album.new
+      album.id = record['album_id']
+      album.title = record['title']
+      album.release_year = record['release_year']
+      artist.albums << album
+    end
+    artist
   end
 end
