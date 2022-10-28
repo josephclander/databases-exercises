@@ -76,18 +76,32 @@ class ArtistRepository
 
     first_artist = result_set.first
 
-    artist = Artist.new
-    artist.id = first_artist['id']
-    artist.name = first_artist['name']
-    artist.genre = first_artist['genre']
+    artist = record_to_artist_object(first_artist)
     artist.albums = []
     result_set.each do |record|
-      album = Album.new
-      album.id = record['album_id']
-      album.title = record['title']
-      album.release_year = record['release_year']
-      artist.albums << album
+      artist.albums << record_to_album_object(record)
     end
+
     artist
+  end
+
+  private
+
+  def record_to_artist_object(record)
+    artist = Artist.new
+    artist.id = record['id']
+    artist.name = record['name']
+    artist.genre = record['genre']
+
+    artist
+  end
+
+  def record_to_album_object(record)
+    album = Album.new
+    album.id = record['album_id']
+    album.title = record['title']
+    album.release_year = record['release_year']
+
+    album
   end
 end
